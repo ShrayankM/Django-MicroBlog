@@ -1,0 +1,27 @@
+{% extends 'posts/base.html' %}
+{% block content %}
+
+<div class='container'>
+    <h1> Posts Detail .... </h1>
+    <h2> {{ post.title }} - Username:{{ post.author.username }} </h2>
+    <p> {{ post.body }}</p>
+
+
+    <form action="{% url 'posts:postlike' pk=post.id %}" method='POST'>
+        {% csrf_token %}
+        <button class='btn btn-primary' type="submit" value = '1' name = 'check'>
+            LIKE - {{ post.get_total_likes }} 
+        </button> 
+        <button class='btn btn-danger' type="submit" value = '0' name = 'check'>
+            DISLIKE - {{ post.get_total_dislikes }}
+        </button>
+    </form>
+
+
+
+    {% if user.is_authenticated and user.id == post.author.id %}
+    <a class='btn btn-warning' href="{% url 'posts:updatepost' pk=post.id %}"> Update </a>
+    {% endif %}
+
+</div>
+{% endblock %}

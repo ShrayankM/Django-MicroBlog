@@ -1,0 +1,23 @@
+h3 {
+    text-align: center;
+}
+
+body {
+    /* background-color: black; */
+}
+
+p {
+    text-align: center;
+}
+
+.loginform {
+    margin: auto;
+}
+
+.bottomtab {
+    margin: auto;
+}
+
+a {
+    padding-top: 2%;
+}

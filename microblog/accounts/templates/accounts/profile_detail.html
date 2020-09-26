@@ -1,0 +1,23 @@
+{% extends 'posts/base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% block content %}
+
+<div class = 'container'>
+    <h1> {{ userprofile.user.username }} </h1>
+    <hr>
+    <h4> {{ userprofile.firstname }} </h4>
+    <h4> {{ userprofile.lastname }} </h4>
+    <h4> {{ userprofile.email }} </h4>
+
+    <a href=" {{ userprofile.instagram_link }} "> <h5> Instagram </h5> </a>
+
+    <img src="{{ userprofile.profile_pic.url }}" alt="">
+
+    <li class="nav-item">
+        <a class='btn btn-success' href="{% url 'accounts:updateprofile' pk=user.users.id %}"> Update Profile
+        </a>
+    </li>
+</div>
+    
+{% endblock %}
