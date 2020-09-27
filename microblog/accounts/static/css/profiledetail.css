@@ -1,0 +1,47 @@
+body {
+    /* background-color: black; */
+}
+
+h1 {
+    font-weight: bold;
+    font-size: xx-large;
+}
+
+.profile {
+    /* border: 2px solid black; */
+    margin-top: 3%;
+}
+
+.userposts {
+    /* border:2px solid black; */
+    margin-top: 3%;
+}
+
+.name {
+    /* font-family: 'Courier New', Courier, monospace; */
+    font-weight: bold;
+    font-size: xx-large;
+}
+
+.username {
+    color: grey;
+    font-size: larger;
+    margin-top: -8%;
+}
+
+.maillink ,.instalink {
+    align-self: start;
+    color: black;
+}
+
+a {
+    color: black;
+}
+
+.postcard {
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+/* .instalink {
+    color: black;
+} */

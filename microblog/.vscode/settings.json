@@ -1,4 +1,4 @@
 {
-    "python.pythonPath": "/home/jackson/GitHub/Micro-Blog/venv/bin/python3",
+    "python.pythonPath": "/home/jackson/GitHub/Python-Environments/venv/bin/python3",
     "compile-hero.disable-compile-files-on-did-save-code": true
 }

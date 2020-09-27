@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from accounts import forms, models
 from django.urls import reverse_lazy
+from posts.models import Post as post_model 
 
 # Create your views here.
 class HomeView(generic.TemplateView):
@@ -32,4 +33,12 @@ class UpdateProfile(generic.UpdateView):
 class DetailProfile(generic.DetailView):
     model = models.UserProfile
     template_name = 'accounts/profile_detail.html'
+
+    def get_context_data(self, **kwargs):
+        profile = get_object_or_404(models.UserProfile, id = self.kwargs['pk'])
+        posts = post_model.objects.filter(author = profile.user)
+        context = super().get_context_data(**kwargs)
+        context["posts"] = posts 
+        return context
+    
 

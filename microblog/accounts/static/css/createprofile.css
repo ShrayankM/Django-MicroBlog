@@ -1,32 +1,28 @@
 body {
-    /* background-color: red; */
+    /* background-color: black; */
 }
 
 h1 {
-    text-align: center;  
+    text-align: center;
 }
 
 h3 {
     text-align: center;
 }
 
-.blogicon {
-    width : 8%;
-    height: 8%;
-}
-
-.userform {
-    /* border:2px solid black;
-    background-color: black; */
+.profileform {
+    /* border:2px solid black; */
+    /* background-color: black; */
     padding-left: 5%;
     /* padding-top: 1%; */
     padding-right: 5%;
-    padding-bottom: 5%;
+    /* padding-bottom: 5%; */
     margin: auto;
 }
 
 input {
-    padding-top: 5px;
+    /* padding-top: 5px; */
+    padding-bottom: 0px;
 }
 
 label {
@@ -37,4 +33,3 @@ label {
 small {
     margin-top: -3%;
 }
-
