@@ -24,7 +24,8 @@
                     <p class="username"> {{ userprofile.user.username }} </p>
                     </p>
 
-                    <a class="form-control btn btn-light" href="{% url 'accounts:updateprofile' pk=user.users.id %}">
+                    <a class="editbutton form-control btn btn-light"
+                        href="{% url 'accounts:updateprofile' pk=user.users.id %}">
                         Edit Profile
                     </a>
                     <br><br>
@@ -52,9 +53,9 @@
                 <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                     <div class="postcard card">
                         <div class="card-body">
-                            <h5 class="card-title"> 
-                                <a href="{% url 'posts:postdetail' pk=post.id %}"> 
-                                    {{ post.title }} 
+                            <h5 class="card-title">
+                                <a href="{% url 'posts:postdetail' pk=post.id %}">
+                                    {{ post.title }}
                                 </a>
                             </h5>
                             <p class="card-text">
@@ -72,3 +73,9 @@
 </div>
 
 {% endblock %}
+
+
+
+{% block forjs %}
+<script src="{% static 'js/profiledetail.js' %}"></script>
+{% endblock  %}
