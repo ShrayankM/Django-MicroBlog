@@ -21,4 +21,16 @@ class Post(models.Model):
     
     def __str__(self):
         return self.title
+
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete = models.CASCADE, related_name = 'postcomments')
+    name = models.CharField(blank = True, max_length = 50)
+    created_date = models.DateTimeField(auto_now = True)
+    body = models.CharField(max_length = 150)
+
+    def get_absolute_url(self):
+        return reverse("posts:postdetail", kwargs={"pk": self.post.pk})
+    
+
     

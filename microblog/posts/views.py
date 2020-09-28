@@ -44,3 +44,15 @@ def post_like(request, pk):
         if post.likes.filter(id = request.user.id).exists():
             post.likes.remove(request.user)
     return HttpResponseRedirect(reverse('posts:postdetail', kwargs = {'pk' : pk}))
+
+
+
+class CreateComment(generic.CreateView):
+    model = models.Comment
+    form_class = forms.CommentForm
+    template_name = "posts/create_comment.html"
+
+    def form_valid(self, form):
+        form.instance.post_id = self.kwargs['pk']
+        return super().form_valid(form)
+

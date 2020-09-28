@@ -49,3 +49,13 @@ $('.registerbtn').mouseout(function() {
     $(this).removeClass( "btn-outline-info");
 })
 
+$('.profilebtn').mouseover(function() {
+    $(this).removeClass("btn-light")
+    $(this).addClass("btn-outline-dark");
+})
+
+$('.profilebtn').mouseout(function() {
+    $(this).addClass("btn-light")
+    $(this).removeClass("btn-outline-dark");
+})
+
