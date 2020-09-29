@@ -1,0 +1,38 @@
+.profileimg {
+    width: 5%;
+    height: 5%;
+}
+
+
+.postcomments {
+    font-family: 'Merriweather Sans', sans-serif;
+}
+
+.posttitle {
+    text-align: center;
+    margin: auto;
+    font-family: 'Merriweather Sans', sans-serif;
+}
+
+.useralert {
+    display: inline-block;
+}
+
+.name {
+    padding-left: 2%;
+    display: inline;
+    font-family: 'Merriweather Sans', sans-serif;
+}
+
+.created_date {
+    display: inline;
+    font-style: italic;
+}
+
+.date {
+    font-style: italic;
+}
+
+.commentbox {
+    visibility: hidden;
+}

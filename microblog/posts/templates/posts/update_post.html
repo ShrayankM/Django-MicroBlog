@@ -5,7 +5,11 @@
 <div class = 'container'>
     <form action="" method = 'POST' >
         {% csrf_token %}
-        {% bootstrap_form form %}
+        <br>
+        <label for="{{ form.title.id_for_label }}"> Title </label>
+        {% bootstrap_field form.title show_label=False %}
+        {% bootstrap_field form.body show_label=False %}
+        {{ form.media }}
         <input class = 'btn btn-success' type="submit" value = 'Update'>
     </form>
 </div>

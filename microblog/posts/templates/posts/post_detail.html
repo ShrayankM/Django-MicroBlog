@@ -1,48 +1,121 @@
 {% extends 'posts/base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+{% load widget_tweaks %}
 {% block content %}
 
-<div class='container'>
-    <h1> Posts Detail .... </h1>
-    <h2> {{ post.title }} - Username:{{ post.author.username }} </h2>
-    <p> {{ post.body|safe }}</p>
 
+<link
+    href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Merriweather+Sans:ital,wght@0,300;0,500;1,800&display=swap"
+    rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/postdetail.css' %}">
 
-    <form action="{% url 'posts:postlike' pk=post.id %}" method='POST'>
-        {% csrf_token %}
-        <button class='btn btn-primary' type="submit" value='1' name='check'>
-            LIKE - {{ post.get_total_likes }}
-        </button>
-        <button class='btn btn-danger' type="submit" value='0' name='check'>
-            DISLIKE - {{ post.get_total_dislikes }}
-        </button>
-    </form>
-
-
-
-    {% if user.is_authenticated and user.id == post.author.id %}
-    <a class='btn btn-warning' href="{% url 'posts:updatepost' pk=post.id %}"> Update </a>
-    {% endif %}
-
+<br>
+<div class="container">
+    <h1 class="posttitle"> {{post.title }} </h1>
     <br>
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 ">
+            <div class="alert alert-secondary">
+
+                <a href="{% url 'accounts:profiledetail' pk=userprofile.pk %}">
+                    <img src="{{ userprofile.profile_pic.url }}" alt=""
+                        class="profileimg rounded rounded-circle img-fluid">
+                </a>
+                <!-- {% if user.users %}
+                <a href="{% url 'accounts:profiledetail' pk=userprofile.pk %}"> 
+                    <img src="{{ userprofile.profile_pic.url }}" alt="" class="profileimg rounded rounded-circle img-fluid">
+                </a>
+                {% else %}
+                <img src="{{ userprofile.profile_pic.url }}" alt="" class="profileimg rounded rounded-circle img-fluid">
+                {% endif %} -->
+
+                <p class="name"> {{ userprofile.name }} </p>
+                <p class="created_date"> {{post.created_date }} </p>
+                {% if user.is_authenticated and user.id == post.author.id %}
+                <a class='btn btn-warning' href="{% url 'posts:updatepost' pk=post.id %}"> Update </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 ">
+            <p> {{ post.body|safe }} </p>
 
 
-    {% if post.postcomments.all %}
-        {% for comment in post.postcomments.all %}
-            {{ comment.name }}
-            {{ comment.body }}
-            {{ comment.created_date }}
+
+            {% if user.is_authenticated %}
+            <form action="{% url 'posts:postlike' pk=post.id %}" method='POST'>
+                {% csrf_token %}
+                <button class="btn btn-primary" type="submit" value='1' name='check'>
+                    Like <span class="badge badge-light"> {{ post.get_total_likes }} </span>
+                </button>
+                <!-- <button class='btn btn-primary' type="submit" value='1' name='check'>
+                    LIKE - {{ post.get_total_likes }}
+                </button> -->
+                <button class='btn btn-danger' type="submit" value='0' name='check'>
+                    Dislike <span class="badge badge-light"> {{ post.get_total_dislikes }} </span>
+                </button>
+            </form>
+            {% else %}
+            <div class="alert alert-danger" role="alert">
+                <h6> Please Login to Like, Dislike and Comment !!!! </h6>
+            </div>
+            {% endif %}
+
             <br>
-        {% endfor %}
-    {% else %}
-    <p> no Comments </p>
-    {% endif %}
+
+            <div class="jumbotron">
+                <h1 class="postcomments"> Comments...
+                    <button class='btn btn-warning'>
+                        <span class="badge badge-light"> {{ post.postcomments.all|length }}
+                        </span>
+                    </button>
+
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="collapse" 
+                    href = "#commentSection" aria-expanded="false" aria-controls="commentSection">
+                        Comment
+                    </button>
+
+                </h1>
+                {% if user.is_authenticated %}
+                <div class="card collapse" id = "commentSection">
+                    <div class="card-body">
+                        <form action="{% url 'posts:createcomment' pk=post.pk %}" method="POST">
+                            {% csrf_token %}
+                            {% bootstrap_field form.name show_label=False %}
+                            {% bootstrap_field form.body show_label=False %}
+                            <button type="submit" class="btn btn-success"> Post </button>
+                        </form>
+
+                    </div>
+                </div>
+                <br>
+                {% endif %}
+
+                {% if post.postcomments.all %}
+
+                {% for comment in post.postcomments.all %}
+                <div class="card">
+                    <div class="card-body">
+                        <p> {{ comment.body }} - {{ comment.name }} ({{ comment.created_date }}) </p>
+
+                    </div>
+                </div>
+                <br>
+                {% endfor %}
+                {% else %}
+                <p> no Comments </p>
+                {% endif %}
+
+            </div>
+
+            <!-- END Comment Section -->
+            <br>
 
 
-
-
-
-    <br>
-    <a class="btn btn-primary" href="{% url 'posts:createcomment' pk=post.pk %}"> Comment </a>
-
+            <br>
+        </div>
+    </div>
 </div>
 {% endblock %}

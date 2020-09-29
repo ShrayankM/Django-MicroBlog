@@ -45,3 +45,16 @@ a {
 /* .instalink {
     color: black;
 } */
+
+.postlinks:hover {
+    color:#5A6268;
+    text-shadow: 2em;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+a:hover {
+    color:#5A6268;
+    text-decoration: none;
+}
+
