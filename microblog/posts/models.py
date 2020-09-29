@@ -7,6 +7,8 @@ from ckeditor.fields import RichTextField
 
 # Create your models here.
 class Post(models.Model):
+    class Meta:
+        ordering = ["-created_date"]
     author = models.ForeignKey(User, on_delete = models.CASCADE);
     title = models.CharField(max_length = 100)
     # body = models.TextField()

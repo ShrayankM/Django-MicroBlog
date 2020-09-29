@@ -1,0 +1,11 @@
+{% extends 'posts/base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+    <form action="" method = "POST">
+        {% csrf_token %}
+        <input class = "btn btn-danger" type="submit" name="" id="" value = "Confirm">
+    </form>
+    <a class = "btn btn-secondary" href="{% url 'posts:home' %}"> Cancel </a>
+{% endblock %}
+    

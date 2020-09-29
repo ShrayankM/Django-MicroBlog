@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404, redirect
+from django.urls.base import reverse_lazy
 from django.views import generic
 from posts import models, forms
 from django.http import HttpResponseRedirect
@@ -20,6 +21,12 @@ class CreatePost(generic.CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+
+
+class DeletePost(generic.DeleteView):
+    model = models.Post
+    template_name = "posts/delete_post.html"
+    success_url = reverse_lazy("posts:home")
 
 
 class UpdatePost(generic.UpdateView):
@@ -78,4 +85,9 @@ def create_comment(request, pk):
             comment.post = post
             comment.save()
             return redirect("posts:postdetail", pk=post.pk)
+
+def delete_post(request, pk):
+    post = get_object_or_404(models.Post, pk = pk)
+    post.delete()
+    return redirect("posts:home")
 

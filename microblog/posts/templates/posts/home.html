@@ -4,11 +4,30 @@
 
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
 
-<div class='container'>
-    <h1> Posts .... </h1>
-    {% for post in postlist %}
-            <h3> <a href="{% url 'posts:postdetail' pk=post.id %}"> {{ post.title }} </a> <br> </h3>
-    {% endfor %}
+<div class = "container">
+    <div class="userposts col-sm-12 col-md-12 col-lg-12">
+        <h1> Posts .... </h1>
+        <div class="row">
+            {% for post in postlist %}
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="postcard card">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a class = "postlinks" href="{% url 'posts:postdetail' pk=post.id %}">
+                                {{ post.title }}
+                            </a>
+                        </h5>
+                        <p class="card-text">
+                            {{ post.body|slice:":200"|safe }} ...
+                        </p>
+                    </div>
+                </div>
+                <br>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 </div>
+
 
 {% endblock %}
