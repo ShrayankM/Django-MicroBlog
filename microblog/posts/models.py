@@ -16,6 +16,12 @@ class Post(models.Model):
     likes = models.ManyToManyField(User, related_name = 'post_likes')
     dislikes = models.ManyToManyField(User, related_name = 'post_dislikes')
     created_date = models.DateTimeField(default = timezone.now)
+    published_date = models.DateTimeField(blank = True, null = True)
+    description = models.CharField(max_length = 255, blank = True, null = True)
+
+    def publish(self):
+        self.published_date = timezone.now()
+        self.save()
 
     def get_total_likes(self):
         return self.likes.count()

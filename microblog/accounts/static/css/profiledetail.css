@@ -46,10 +46,15 @@ a {
     color: black;
 } */
 
+.postlinks {
+    font-weight: bold;
+    font-size: larger;
+}
+
 .postlinks:hover {
     color:#5A6268;
     text-shadow: 2em;
-    font-weight: bold;
+    /* font-weight: bold; */
     text-decoration: none;
 }
 

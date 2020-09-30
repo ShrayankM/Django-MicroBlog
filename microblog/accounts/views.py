@@ -6,10 +6,8 @@ from accounts import forms, models
 from django.urls import reverse_lazy, reverse
 from posts.models import Post as post_model 
 from accounts.models import UserProfile as user_model
-import os
-from pathlib import Path
+from django.utils import timezone
 
-BASE_DIR = Path(__file__).resolve().parent.parent
 # Create your views here.
 class HomeView(generic.TemplateView):
     template_name = 'accounts/home.html'
@@ -45,17 +43,17 @@ class UpdateProfile(generic.UpdateView):
 
 
         
-
-
 class DetailProfile(generic.DetailView):
     model = models.UserProfile
     template_name = 'accounts/profile_detail.html'
 
     def get_context_data(self, **kwargs):
         profile = get_object_or_404(models.UserProfile, id = self.kwargs['pk'])
-        posts = post_model.objects.filter(author = profile.user).order_by("-created_date")
+        posts = post_model.objects.filter(author = profile.user, published_date__lte = timezone.now()).order_by("-published_date")
+        drafts = post_model.objects.filter(author = profile.user, published_date__isnull = True).order_by("-created_date")
         context = super().get_context_data(**kwargs)
         context["posts"] = posts 
+        context["drafts"] = drafts
         return context
     
 

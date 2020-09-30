@@ -1,11 +1,48 @@
 {% extends 'posts/base.html' %}
 {% load bootstrap4 %}
-
+{% load static %}
+{% load widget_tweaks %}
 {% block content %}
-    <form action="" method = "POST">
-        {% csrf_token %}
-        <input class = "btn btn-danger" type="submit" name="" id="" value = "Confirm">
-    </form>
-    <a class = "btn btn-secondary" href="{% url 'posts:home' %}"> Cancel </a>
+
+<link rel="stylesheet" href="{% static 'css/deletepost.css' %}">
+    
+<div class="container">
+    <br>
+    <h1 class="posttitle"> {{post.title }} </h1>
+    <br>
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 ">
+            <div class="alert alert-secondary">
+
+
+                <p class="name"> {{ userprofile.name }} </p>
+                <p class="created_date"> {{post.created_date }} </p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 ">
+            <p> {{ post.body|safe }} </p>
+
+
+            <br>
+        </div>
+    </div>
+</div>
+
+<div class = "container">
+    <div class="alert alert-secondary">
+
+        <form action="" method = "POST">
+            {% csrf_token %}
+            <input class = "btn btn-danger" type="submit" name="" id="" value = "Confirm">
+            <a class = "btn btn-secondary" href="{% url 'posts:home' %}"> Cancel </a>
+        </form>
+        
+    </div>
+</div>
+
+        
+    
 {% endblock %}
     

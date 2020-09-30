@@ -13,11 +13,12 @@
 <br>
 <div class="container">
     <h1 class="posttitle"> {{post.title }} </h1>
+    
     <br>
     <div class="row">
         <div class="col-12 col-sm-12 col-md-12 col-lg-12 ">
             <div class="alert alert-secondary">
-
+               
                 <a href="{% url 'accounts:profiledetail' pk=userprofile.pk %}">
                     <img src="{{ userprofile.profile_pic.url }}" alt=""
                         class="profileimg rounded rounded-circle img-fluid">
@@ -32,18 +33,17 @@
 
                 <p class="name"> {{ userprofile.name }} </p>
                 <p class="created_date"> {{post.created_date }} </p>
-                {% if user.is_authenticated and user.id == post.author.id %}
+                <!-- {% if user.is_authenticated and user.id == post.author.id %}
                 <a class='btn btn-warning' href="{% url 'posts:updatepost' pk=post.id %}"> Update </a>
-                <!-- <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                    Link with href
-                  </a> -->
-                
-                {% endif %}
+                {% endif %} -->
             </div>
         </div>
     </div>
     <div class="row">
+        
         <div class="col-12 col-sm-12 col-md-12 col-lg-12 ">
+            <p class = "description"> Description: {{ post.description }}</p>
+            <hr>
             <p> {{ post.body|safe }} </p>
 
             
@@ -87,12 +87,12 @@
                         Comment !!!
                     </button>
 
-                    <a class='btn btn-danger dropdown-toggle' data-toggle="collapse" href="#deleteSection" role="button"
-                    aria-expanded="false" aria-controls="deleteSection"> Delete Post ? </a>
+                    <!-- <a class='btn btn-danger dropdown-toggle' data-toggle="collapse" href="#deleteSection" role="button"
+                    aria-expanded="false" aria-controls="deleteSection"> Delete Post ? </a> -->
 
                 </h1>
 
-                <div class="collapse" id="deleteSection">
+                <!-- <div class="collapse" id="deleteSection">
                     <div class="card-body">
                         <form action="{% url 'posts:deletepost' pk=post.id %}" method="POST">
                             {% csrf_token %}
@@ -101,7 +101,7 @@
                         </form>
                         
                     </div>
-                </div>
+                </div> -->
                 {% if user.is_authenticated %}
                 <div class="card collapse" id="commentSection">
                     <div class="card-body">

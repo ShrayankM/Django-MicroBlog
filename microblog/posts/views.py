@@ -6,12 +6,17 @@ from posts import models, forms
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from accounts.models import UserProfile
+from django.utils import timezone
 
 # Create your views here.
 class HomeView(generic.ListView):
     model = models.Post
     template_name = 'posts/home.html'
     context_object_name = 'postlist'
+
+    # def get_queryset(request):
+    #     return models.Post.objects.filter(published_date__lte = timezone.now()).order_by("-published_date")
+
     
 class CreatePost(generic.CreateView):
     model = models.Post
@@ -27,6 +32,17 @@ class DeletePost(generic.DeleteView):
     model = models.Post
     template_name = "posts/delete_post.html"
     success_url = reverse_lazy("posts:home")
+
+    
+    def get_context_date(self, **kwargs):
+        post = get_object_or_404(models.Post, id = kwargs['pk'])
+        context = super().get_context_data(**kwargs)
+        context["post"] = post
+        return context
+   
+    
+    
+    
 
 
 class UpdatePost(generic.UpdateView):
@@ -47,6 +63,11 @@ class PostDetail(generic.DetailView):
         context["userprofile"] = profile
         context["form"] = comment_form
         return context
+
+
+class DraftDetail(generic.DetailView):
+    model = models.Post
+    template_name = 'posts/draft_detail.html'
     
     
 
@@ -90,4 +111,10 @@ def delete_post(request, pk):
     post = get_object_or_404(models.Post, pk = pk)
     post.delete()
     return redirect("posts:home")
+
+
+def post_publish(request, pk):
+    post = get_object_or_404(models.Post, pk = pk)
+    post.publish()
+    return redirect("posts:postdetail", pk = pk)
 

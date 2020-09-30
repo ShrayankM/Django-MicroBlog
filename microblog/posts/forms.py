@@ -6,9 +6,12 @@ class PostForm(forms.ModelForm):
     title = forms.CharField(widget = forms.TextInput(attrs = {
         'class' : 'title form-control'
     }))
+    description = forms.CharField(widget = forms.TextInput(attrs = {
+        'class' : 'description form-control'
+    }))
     class Meta:
         model = models.Post
-        fields = ('title', 'body')
+        fields = ('title', 'description', 'body')
 
 
 class CommentForm(forms.ModelForm):

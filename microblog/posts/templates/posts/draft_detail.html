@@ -1,0 +1,57 @@
+{% extends 'posts/base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Merriweather+Sans:ital,wght@0,300;0,500;1,800&display=swap"
+    rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/draftdetail.css' %}">
+
+<br>
+<div class="container">
+    <h1 class="posttitle"> {{post.title }} </h1>
+    <br>
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 ">
+            <div class="alert alert-secondary">
+
+
+                <p class="name"> {{ post.author.username }} </p>
+                <p class="created_date"> {{post.created_date }} </p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 ">
+            <p> {{ post.body|safe }} </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 ">
+            <div class="alert alert-secondary">
+                {% if user.is_authenticated and user.id == post.author.id %}
+                <a class='btn btn-warning' href="{% url 'posts:updatepost' pk=post.id %}"> Update </a>
+                <a class='btn btn-success' href="{% url 'posts:post_publish' pk=post.id %}"> Publish </a>
+                <a class='btn btn-dark dropdown-toggle' data-toggle="collapse" href="#deleteSection" role="button"
+                    aria-expanded="false" aria-controls="deleteSection"> Delete Draft ? </a>
+                {% endif %}
+
+                <div class="collapse" id="deleteSection">
+                    <br>
+                    <form action="{% url 'posts:deletepost' pk=post.id %}" method="POST">
+                        {% csrf_token %}
+                        <input class="btn btn-danger" type="submit" name="" id="" value="Confirm">
+                        <a class="btn btn-secondary" href="{% url 'posts:home' %}"> Cancel </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+</div>
+{% endblock %}

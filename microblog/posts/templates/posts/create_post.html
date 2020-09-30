@@ -12,9 +12,12 @@
         <!-- {% bootstrap_form form %} -->
         <label for="{{ form.title.id_for_label }}"> Title </label>
         {% bootstrap_field form.title show_label=False %}
+
+        <label for="{{ form.description.id_for_label }}"> Description </label>
+        {% bootstrap_field form.description show_label=False %}
         {% bootstrap_field form.body show_label=False %}
         {{ form.media }}
-        <input class = 'btn btn-success' type="submit" value = 'Create'>
+        <input class = 'btn btn-success' type="submit" value = 'Save to Drafts'>
     </form>
 </div>
 {% endblock %}
