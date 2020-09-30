@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'widget_tweaks',
+    'colorfield',
     'ckeditor',
     'bootstrap4',
     'accounts',
@@ -80,6 +81,19 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'microblog.wsgi.application'
+
+
+CKEDITOR_CONFIGS = {
+    'awesome_ckeditor': {
+        'toolbar': 'Basic',
+    },
+
+    'default': {
+        'toolbar': 'full',
+        'height': 300,
+        'width': '100%',
+    },
+}
 
 
 # Database

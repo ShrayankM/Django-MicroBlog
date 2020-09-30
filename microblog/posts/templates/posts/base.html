@@ -26,11 +26,19 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 {% if user.is_authenticated %}
+                <!-- <li class="nav-item">
+                    <a class="postbtn btn btn-light" href="{% url 'posts:createpost' %}"> Create Post </a>
+                </li> -->
+
+                <!-- <li class="nav-item">
+                    <a class="profilebtn btn btn-light" href="{% url 'accounts:createprofile' %}"> Create Profile
+                    </a>
+                </li> -->
+
+                {% if user.users %}
                 <li class="nav-item">
                     <a class="postbtn btn btn-light" href="{% url 'posts:createpost' %}"> Create Post </a>
                 </li>
-
-                {% if user.users %}
                 <li class="nav-item">
                     <a class="viewbtn btn btn-light" href="{% url 'accounts:profiledetail' pk=user.users.id %}"> View
                     </a>

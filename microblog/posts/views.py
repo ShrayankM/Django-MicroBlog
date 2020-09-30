@@ -14,8 +14,8 @@ class HomeView(generic.ListView):
     template_name = 'posts/home.html'
     context_object_name = 'postlist'
 
-    # def get_queryset(request):
-    #     return models.Post.objects.filter(published_date__lte = timezone.now()).order_by("-published_date")
+    def get_queryset(request):
+        return models.Post.objects.filter(published_date__lte = timezone.now()).order_by("-published_date")
 
     
 class CreatePost(generic.CreateView):
@@ -40,10 +40,6 @@ class DeletePost(generic.DeleteView):
         context["post"] = post
         return context
    
-    
-    
-    
-
 
 class UpdatePost(generic.UpdateView):
     model = models.Post
@@ -85,8 +81,6 @@ def post_like(request, pk):
         if post.likes.filter(id = request.user.id).exists():
             post.likes.remove(request.user)
     return HttpResponseRedirect(reverse('posts:postdetail', kwargs = {'pk' : pk}))
-
-
 
 # class CreateComment(generic.CreateView):
 #     model = models.Comment

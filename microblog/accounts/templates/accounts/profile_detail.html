@@ -16,15 +16,28 @@
 
             <div class="row">
                 <div class="col-3 col-sm-6 col-md-12 col-lg-12">
+                    
+                    {% if userprofile.profile_pic %}
                     <img src="{{ userprofile.profile_pic.url }}" alt="" class="rounded-circle img-fluid">
+                    {% else %}
+                    <img src="{% static 'assets/profiledefault/default-profile-picture.jpg' %}" alt="" class="rounded-circle img-fluid">
+                    {% endif %}
+                        
+                   
                 </div>
 
                 <div class="col-9 col-sm-6 col-md-12 col-lg-12">
 
-                    <p class="name">
+                    <span class = "name">
+                        {{ userprofile.name }}
+                    </span><br>
+                    <span class = "username">
+                        {{ userprofile.user.username }}
+                    </span>
+                    <!-- <p class="name">
                         {{ userprofile.name }}
                     <p class="username"> {{ userprofile.user.username }} </p>
-                    </p>
+                    </p> -->
 
                     {% if user.id == userprofile.user.id %}
                     <a class="editbutton form-control btn btn-light"
@@ -33,7 +46,7 @@
                     </a>
                     {% endif %}
 
-                    
+
                     <br><br>
 
                     <img class="mail" src="{% static 'assets/icons/mailbox.svg'%}">
@@ -41,10 +54,16 @@
                         Email
                     </a>
                     <br>
+
+                    
+                    {% if userprofile.instagram_link %}
                     <img class="insta" src="{% static 'assets/icons/camera.svg'%}">
                     <a class="instalink" href=" {{ userprofile.instagram_link }} ">
                         Instagram
                     </a>
+                    {% endif %}
+                        
+                    
 
                 </div>
             </div>
@@ -56,73 +75,98 @@
             {% if not posts %}
             <div class="alert alert-warning" role="alert">
                 No blog' published
-              </div>
+            </div>
             {% endif %}
-                
+
+
             <div class="row">
                 {% for post in posts %}
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="postcard card">
                         <div class="card-body">
                             <h5 class="card-title">
-                                <a class = "postlinks" href="{% url 'posts:postdetail' pk=post.id %}">
+                                <a class="postlinks" href="{% url 'posts:postdetail' pk=post.id %}">
                                     {{ post.title }}
                                 </a>
+                                <span class = "categoryTag">
+                                    <span class="category-color" style="background-color:{{ post.category.color }}">
+                                    </span>
+                                    {{ post.category.category }}
+                                </span>
                             </h5>
                             <hr>
-                            <p class="card-text">
-                                <blockquote class="blockquote mb-0">
-                                    <p> Description: {{ post.description }} </p>
-                                    <footer class="blockquote-footer">
-                                        Created-Date: <cite title="Source Title"> {{ post.created_date }} <cite>
-                                    </footer>
-                                </blockquote>
-                                <br>
-                                <a class = "deletebtn btn btn-light" href="{% url 'posts:deletepost' pk=post.id %}"> Delete Post ? </a>
-                                <a class = "updatebtn btn btn-light" href="{% url 'posts:updatepost' pk=post.id %}"> Update </a>
-                            </p>
+                            <span> 
+                                Description: {{ post.description }} 
+                            </span><br>
+                            <span class = "dateTag">
+
+                                <footer class="blockquote-footer">
+                                    Created-Date: <cite title="Source Title"> {{ post.created_date }} <cite>
+                                </footer>
+                            </span>
+
+                            {% if user.id == userprofile.user.id %}
+
+                            <span class = "buttonTag">
+                                <a class="deletebtn btn-light btn" href="{% url 'posts:deletepost' pk=post.id %}">
+                                    Delete Post ? </a>
+                                <a class="updatebtn btn-light btn" href="{% url 'posts:updatepost' pk=post.id %}">
+                                    Update </a>
+                            </span>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
                 {% endfor %}
             </div>
             <hr>
-            
+
 
             {% if user.id == userprofile.user.id %}
             <h1> Drafts .... </h1>
             <hr>
             <div class="alert alert-danger" role="alert">
-                Your unpublished drafts
-              </div>
-            <div class = "row">
-                
-                {% for draft in drafts %}
+                Your unpublished drafts appear here.
+            </div>
+            <div class="row">
+                {% for post in drafts %}
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="postcard card">
                         <div class="card-body">
                             <h5 class="card-title">
-                                <a class = "postlinks" href="{% url 'posts:draftdetail' pk=draft.pk %}">
-                                    {{ draft.title }}
+                                <a class="postlinks" href="{% url 'posts:draftdetail' pk=post.id %}">
+                                    {{ post.title }}
                                 </a>
+                                <span class = "categoryTag">
+                                    <span class="category-color" style="background-color:{{ post.category.color }}">
+                                    </span>
+                                    {{ post.category.category }}
+                                </span>
                             </h5>
                             <hr>
-                            <p class="card-text">
-                                <blockquote class="blockquote mb-0">
-                                    <p> Description: {{ draft.description }} </p>
-                                    <footer class="blockquote-footer">
-                                        Created-Date: <cite title="Source Title"> {{ draft.created_date }} <cite>
-                                    </footer>
-                                </blockquote>
-                            </p>
+                            <span> 
+                                Description: {{ post.description }} 
+                            </span><br>
+                            <span class = "dateTag">
+
+                                <footer class="blockquote-footer">
+                                    Created-Date: <cite title="Source Title"> {{ post.created_date }} <cite>
+                                </footer>
+                            </span>
+
+                            <!-- <span class = "buttonTag">
+                                <a class="deletebtn btn-light btn" href="{% url 'posts:deletepost' pk=post.id %}">
+                                    Delete Post ? </a>
+                                <a class="updatebtn btn-light btn" href="{% url 'posts:updatepost' pk=post.id %}">
+                                    Update </a>
+                            </span> -->
                         </div>
                     </div>
                 </div>
                 {% endfor %}
-                    
             </div>
             {% endif %}
-            
+
         </div>
     </div>
 </div>

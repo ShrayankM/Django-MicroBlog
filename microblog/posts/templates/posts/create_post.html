@@ -6,19 +6,36 @@
 <link rel="stylesheet" href="{% static 'css/createpost.css' %}">
     
 <div class = 'container'>
+    <br>
+    <h1> Creating BLOG.... </h1>
     <form action="" method = 'POST' >
         {% csrf_token %}
         <br>
         <!-- {% bootstrap_form form %} -->
-        <label for="{{ form.title.id_for_label }}"> Title </label>
+        <label class = "title" for="{{ form.title.id_for_label }}"> Title </label>
         {% bootstrap_field form.title show_label=False %}
 
-        <label for="{{ form.description.id_for_label }}"> Description </label>
+        <label class = "des" for="{{ form.description.id_for_label }}"> Description </label>
         {% bootstrap_field form.description show_label=False %}
-        {% bootstrap_field form.body show_label=False %}
-        {{ form.media }}
-        <input class = 'btn btn-success' type="submit" value = 'Save to Drafts'>
+
+        <label class = "category" for="{{ form.category.id_for_label }}"> Category </label>
+        {% bootstrap_field form.category show_label=False %}
+
+        <div class = "row">
+            <div class = "col-12 editor">
+                {% bootstrap_field form.body show_label=False %}
+                {{ form.media }}
+            </div>
+        </div>
+        
+        
+        <input class = 'form-control btn btn-success' type="submit" value = 'Save to Drafts'>
     </form>
+    <br><br>
 </div>
+
+<script>
+    $(".django-ckeditor-widget").removeAttr('style');
+</script>
 {% endblock %}
     

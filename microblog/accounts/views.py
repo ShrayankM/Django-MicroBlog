@@ -27,7 +27,7 @@ class CreateProfile(generic.CreateView):
         try:
             if self.request.user.users:
                 return HttpResponseRedirect(reverse("posts:home"))
-        except ObjectDoesNotExist:
+        except Exception as e:
             return super().get(*args, **kwargs)
         return super().get(*args, **kwargs)
 
@@ -37,7 +37,7 @@ class CreateProfile(generic.CreateView):
 
 class UpdateProfile(generic.UpdateView):
     model = models.UserProfile
-    form_class = forms.UserProfileForm
+    form_class = forms.UserProfileUpdateForm
     template_name = 'accounts/update_profile.html'
     success_url = reverse_lazy('posts:home')
 

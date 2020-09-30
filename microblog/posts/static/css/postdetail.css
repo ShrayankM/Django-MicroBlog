@@ -42,3 +42,17 @@
     font-style: italic;
     font-weight: bold;
 }
+
+.dateTag {
+    float: right;
+}
+
+.commentName {
+    font-weight: bold;
+    font-family: 'Merriweather Sans', sans-serif;
+}
+
+.commentBody {
+    font-style: italic;
+    font-weight: lighter;
+}

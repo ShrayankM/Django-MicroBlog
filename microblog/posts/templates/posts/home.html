@@ -7,7 +7,7 @@
 <div class="container">
     <br>
     <div class="userposts col-sm-12 col-md-12 col-lg-12">
-        <h1> Posts .... </h1>
+        <h1> Blog's .... </h1>
 
         <div class="row">
             {% for post in postlist %}
@@ -18,17 +18,25 @@
                             <a class="postlinks" href="{% url 'posts:postdetail' pk=post.id %}">
                                 {{ post.title }}
                             </a>
+                            <span class="categoryTag">
+                                <span class="category-color" style="background-color:{{ post.category.color }}">
+                                </span>
+                                {{ post.category.category }}
+                            </span>
                         </h5>
                         <hr>
-
-                        <p class="card-text">
-                            <blockquote class="blockquote mb-0">
-                                <p> Description: {{ post.description }} </p>
-                                <footer class="blockquote-footer">
-                                    Created-Date: <cite title="Source Title"> {{ post.created_date }} <cite>
-                                </footer>
-                            </blockquote>
-                        </p>
+                        <span>
+                            Description: {{ post.description }}
+                            <footer class="dateTag blockquote-footer">
+                                Published-On: <cite title="Source Title"> {{ post.published_date }} <cite>
+                                <span class="writer">
+                                    Written By - 
+                                    <a class = "writerlink" href="{% url 'accounts:profiledetail' pk=post.author.users.pk %}"> 
+                                        {{ post.author.users.name }} 
+                                    </a>
+                                </span>
+                            </footer>
+                        </span>
                     </div>
                 </div>
             </div>

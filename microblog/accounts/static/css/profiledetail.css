@@ -47,19 +47,47 @@ a {
 } */
 
 .postlinks {
+    color:#0466D6;
     font-weight: bold;
     font-size: larger;
+    text-decoration: none;
 }
 
 .postlinks:hover {
-    color:#5A6268;
+    color:#0466D6;
     text-shadow: 2em;
     /* font-weight: bold; */
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 a:hover {
     color:#5A6268;
     text-decoration: none;
+}
+
+.category-color {
+    top: 1px;
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.categoryTag {
+    float: right;
+}
+
+.dateTag {
+    float: right;
+    padding-top: 3%;
+}
+
+.buttonTag {
+    float: left;
+    padding-top: 3%;
+}
+
+.deletebutton {
+    height: 5em;
 }
 

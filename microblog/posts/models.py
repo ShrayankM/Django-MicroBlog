@@ -4,20 +4,29 @@ from django.forms import widgets
 from django.urls import reverse
 from django.utils import timezone
 from ckeditor.fields import RichTextField
+from colorfield.fields import ColorField
 
 # Create your models here.
+class Category(models.Model):
+    category = models.CharField(max_length = 50)
+    color = ColorField(default='#FF0000')
+
+    def __str__(self):
+        return str(self.category)
+
 class Post(models.Model):
     class Meta:
         ordering = ["-created_date"]
     author = models.ForeignKey(User, on_delete = models.CASCADE);
     title = models.CharField(max_length = 100)
     # body = models.TextField()
-    body = RichTextField(blank = True, null = True)
+    body = RichTextField(blank = True, null = True, config_name = "default")
     likes = models.ManyToManyField(User, related_name = 'post_likes')
     dislikes = models.ManyToManyField(User, related_name = 'post_dislikes')
     created_date = models.DateTimeField(default = timezone.now)
     published_date = models.DateTimeField(blank = True, null = True)
     description = models.CharField(max_length = 255, blank = True, null = True)
+    category = models.ForeignKey(Category, null = True, blank = True, on_delete = models.CASCADE)
 
     def publish(self):
         self.published_date = timezone.now()
@@ -43,9 +52,12 @@ class Comment(models.Model):
     name = models.CharField(blank = True, max_length = 50)
     created_date = models.DateTimeField(auto_now = True)
     body = models.CharField(max_length = 150)
-
+    
     def get_absolute_url(self):
         return reverse("posts:postdetail", kwargs={"pk": self.post.pk})
+
+
+
 
     
 

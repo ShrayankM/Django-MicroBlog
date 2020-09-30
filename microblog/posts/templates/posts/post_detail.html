@@ -13,12 +13,12 @@
 <br>
 <div class="container">
     <h1 class="posttitle"> {{post.title }} </h1>
-    
+
     <br>
     <div class="row">
         <div class="col-12 col-sm-12 col-md-12 col-lg-12 ">
             <div class="alert alert-secondary">
-               
+
                 <a href="{% url 'accounts:profiledetail' pk=userprofile.pk %}">
                     <img src="{{ userprofile.profile_pic.url }}" alt=""
                         class="profileimg rounded rounded-circle img-fluid">
@@ -40,13 +40,13 @@
         </div>
     </div>
     <div class="row">
-        
+
         <div class="col-12 col-sm-12 col-md-12 col-lg-12 ">
-            <p class = "description"> Description: {{ post.description }}</p>
+            <p class="description"> Description: {{ post.description }}</p>
             <hr>
             <p> {{ post.body|safe }} </p>
 
-            
+
 
             {% if user.is_authenticated %}
             <form action="{% url 'posts:postlike' pk=post.id %}" method='POST'>
@@ -69,11 +69,11 @@
 
             <br>
 
-            
-            
-                
 
-                
+
+
+
+
 
             <div class="jumbotron">
                 <h1 class="postcomments"> Comments...
@@ -122,14 +122,26 @@
                 {% for comment in post.postcomments.all %}
                 <div class="card">
                     <div class="card-body">
-                        <p> {{ comment.body }} - {{ comment.name }} ({{ comment.created_date }}) </p>
+                        <span class = "commentName">
+                            {{ comment.name }}
+                        </span><br>
 
+                        <span class = "commentBody">
+                            {{ comment.body }}
+                        </span>
+                        <span> 
+                            <span class = "dateTag">
+                                <footer class="blockquote-footer">
+                                    Created-Date: <cite title="Source Title"> {{ comment.created_date }} <cite>
+                                </footer>
+                            </span>
+                        </span>
                     </div>
                 </div>
                 <br>
                 {% endfor %}
                 {% else %}
-                <p> no Comments </p>
+                <span> No Comments </span>
                 {% endif %}
 
             </div>

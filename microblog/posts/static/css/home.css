@@ -3,7 +3,52 @@ a:hover {
     text-decoration: none;
 }
 
+.postlinks {
+    color:#0466D6;
+    font-weight: bold;
+    font-size: larger;
+    text-decoration: none;
+}
+
+.postlinks:hover {
+    color:#0466D6;
+    text-shadow: 2em;
+    /* font-weight: bold; */
+    text-decoration: underline;
+}
+
 .postcard {
     margin-top: 2%;
     margin-bottom: 2%;
+}
+
+.category-color {
+    top: 1px;
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.categoryTag {
+    float: right;
+}
+
+.dateTag {
+    font-size: medium;
+    padding-top: 1%;
+}
+
+.writer {
+    float: right;
+    color: black;
+}
+
+.writerlink {
+    color:black;
+}
+
+.writerlink:hover {
+    color:black;
+    text-decoration: underline;
 }
