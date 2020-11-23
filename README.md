@@ -38,6 +38,9 @@ Simple Blog application created using Django Framework.
 ```
 6. The project will be available at **127.0.0.1:8000** in your browser.
 
+## Credits:
+      * The website can be found live at http://microblog76.pythonanywhere.com/
+
 ## License: 
    * [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
    
