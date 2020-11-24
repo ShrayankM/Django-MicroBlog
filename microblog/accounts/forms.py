@@ -39,6 +39,9 @@ class UserProfileForm(forms.ModelForm):
     # profile_pic = forms.ImageField(widget = forms.FileInput(attrs = {
     #     'class' : 'custom-file-input'
     # }))
+    profile_pic = forms.ImageField(widget = forms.FileInput(attrs = {
+        'class' : 'custom-file-input'
+    }))
     class Meta:
         model = models.UserProfile
         fields = ('name', 'email', 'profile_pic', 'instagram_link')
